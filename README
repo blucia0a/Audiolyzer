@@ -1,0 +1,47 @@
+###################################################################
+#Audiolyzer - a tool to make your programs sing
+#and
+#Nondeterminate - a composition for computer and Audiolyzer pintool
+#
+#Copyright Brandon Lucia 2010 
+#blucia@gmail.com
+##############################################
+#
+###################################################################
+
+Audiolyzer is a pintool that generates a thread-specific tone as a thread
+executes a synchronization operation.  That means Audiolyzer is primarily
+intended for use with multi-threaded programs (single threaded programs
+would likely not be very interesting to listen to).  Audiolyzer uses the
+Audiere (http://audiere.sourceforge.net) sin wave signal generator.
+
+Here are the basics to using this program.
+
+-----------
+-Building
+-----------
+To build this program, you'll need to first install Pin and Audiere.  Next,
+open the Makefile, and set AUDIERE_HOME and PIN_HOME to the place where you
+installed those libraries (or set them in your environment).  Next, type 'make
+Audiolyzer'.  This will build the pintool.
+
+--------
+-Running
+--------
+Running is simple -- there are no options to Audilyzer (yet...), so it is as
+simple as running pin:
+
+'pin -mt -t Audiolyzer -- <your program>'
+
+--------------------
+-What to run?
+--------------------
+Now, you'll need a piece of music (a program =] ) to run under the audiolyzer
+to hear it in action.  I have included a composition that I wrote for the
+audiolyzer with this project.  It is called "Nondeterminate", and it explores
+the aesthetics of non-determinism in computer systems, and how nondeterminism
+manifests in generated music as regular, spontaneously emergent patterns.  A
+more thorough and coherent discussion of Nondeterminate can be found at
+http://catspajamas.tumblr.com.  You could also run any program you damn well
+please.  If you run something that sounds interesting, record it, and send it
+my way - I'd love to hear what other people do with this thing that I made. 
