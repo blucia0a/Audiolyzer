@@ -1,0 +1,169 @@
+The name of the work I am presenting this week is Nondeterminate.
+Nondeterminate is a piece of music that I wrote in a computer programming
+language, and that is interpreted and played by a computer, uniquely, every
+time the program is run.  The key idea of this work is that it explores the
+idea of ``nondeterminism'' in complex systems --- and in this case, the complex
+system is a computer.  I'm going to do my best to explain a few things about
+this piece here: (1)What is nondeterminism? (2)Why are computers
+nondeterministic? (3)How can a computer program be ``interpreted'' by a
+computer ``uniquely''? (4)What you should listen for when you hear
+Nondeterminate.  I may not go in that order, but I'll cover each of those
+points.  Along the way, I'll mention some related music you might want to check
+out, and at the end, I'll talk about other ideas I have related to this idea of nondeterminism.
+
+So the most important thing to sort out is what I mean when I say
+``nondeterminism''.  We all have some definition of this in our heads, I'm
+sure.  In this context, I consider an event nondeterministic if it is hard to
+predict, but not random.  A good example of something nondeterministic in the
+real world is the location of a traffic jam -- it isn't random, because it is
+the result of some idiot or an accident or something, but it is very hard to
+predict in advance where a traffic jam will take place.  
+
+The flow of particles in a body of fluid is another example -- it isn't random,
+but we can't figure out how to model it (it is a 1000 year old open problem in
+mathematics to model fluid flow without randomness).  The idea that randomness
+closely models nondeterminism allows us to approximately think about the idea,
+but is somewhat deceptive.  Very few things are truly random, and it is
+important to keep in mind that nondeterministic events have a clear causal
+chain, but that it is very difficult to understand or predict.  In fact this is
+one of the key ideas of the piece today: In Nondeterminate I quite deliberately
+did not use randomness.  
+
+The absence of randomness is essential, in my opinion, because the idea of
+chance in music has been explored deeply by many people.  One example that is
+particularly relevant in this discussion is 'Pithoprakta' by Iannis Xenakis.
+This piece is a musical encoding, for a small orchestra, of a mathematical
+model of the flow of particles in a fluid.  This model is approximate, and
+relies on randomness to simulate nondeterminism -- we have all probably heard
+of 'brownian motion'; that is the model that Xenakis turned into music.
+
+I found out about this piece of music after I performed an experiment with a
+fluid dynamics simulation of my own.  I have a program that models the
+interaction of particles in a fluid that some physicist somewhere wrote.  Using
+the same technique I used to make Nondeterminate a piece of music (which I will
+explain in just second), I made this simulation a piece of music.  The result
+was random noise.  The reason is that the simulation uses randomness.  
+
+The above three paragraphs answer point (1).  Nondeterministic events are
+non-random, but difficult to predict, and always have a causal chain.  So why
+are computers a good example of this?  
+
+Today's computers are designed to do many things at the same time.  The idea of
+doing things at the same time is called ``concurrency''.  A computer program
+is, at its heart, just a list of things for the computer to do.  Add 1 + 2,
+read a value from the computer's memory, etc.  Capturing the idea of
+concurrency, programmers can create programs made up of individual ``threads''
+of execution.  Each thread is, in effect, it's own program.  The threads all
+run through their lists of things to do concurrently.  Threads can run, and
+ignore the activities of the other threads, but more often, threads must
+communicate with one another.
+
+The threads are operating independently in a concurrent program.  That means if
+I am thread #1, and you are thrad #2, I don't necessarily know what you're
+doing, and you don't know what I am doing.  But occasionally, I need some piece
+of information that you recently computed, and so I communicate with you to get
+it, so I can continue doing my list of things.  However, threads may also power
+through their lists of things at different rates, and the rate at which a
+single thread makes progress is very difficult to predict (in fact, this is an
+open problem in computer science).  Furthermore, from one execution to the
+next, a thread's rate of execution may vary from prior and future executions
+due to environmental factors (the temperature of the air can even have an
+impact on this).  The result is that the order in which the communications that
+take place between threads is difficult to predict, but is not random -- it is
+nondeterministic.  This nondeterminism is the nondeterminism I intend to
+explore.
+
+I am now through points (1) and (2).  The next thing to explain is how a
+computer can transform a non-deterministic pattern of inter-thread
+communication events into a piece of music.  I am going to spare you some
+details here, because this is probably the least interesting part.  I wrote
+another program that takes any arbitrary program as its input.  This program is
+called Audiolyzer (I released it on the web at
+http://github.com/blucia0a/Audiolyzer).  The way Audiolyzer works is by
+analyzing the code that makes up each thread in the program that was its input.
+During that analysis, it finds communication events, and marks them with a
+special marker.  This marker generates a tone when the program runs.  Each
+thread has its own unique tone, and so when you run a program using Audiolyzer,
+you can hear the interleaving of the communication events in the program's
+threads.  The interleaving is non-deterministic from run to run, and so the
+pattern of sounds you hear each time you run the proram is unique.  The
+computer is interpreting the program and generating a new piece of music with
+each execution.
+
+Finally, I am going to get to point (4).  Now I'm going to discuss some things
+you should listen for when you listen to Nondeterminate.  The piece is
+organized in four movements.  Each is intended to explore a different aspect of
+nondeterminism.  When you are first listening, you will hear what initially
+sounds like random bleeps and bloops all mixed together.  It isn't the case!
+Listen carefully and patterns will emerge.  
+
+The reason for the patterns is that there is one additional constraint on the
+interleaving of communication events.  That constraint is that every thread
+eventually needs to get a turn.  The computer is being fair.  For example, if
+there are 16 threads (like there are in movement #1), you may hear the tone
+that corresponds to thread #1 first.  After that, you will not hear thread #1's
+tone again, until you've heard all the other threads' tones.  This ensures that
+every thread gets to do its communcation without being ``starved''.  The
+patterns in this case will be length 16 sequences of tones.
+
+It isn't a hard and fast rule, however, which is another interesting feature of
+the piece -- you will hear the sequences mutate as the piece unfolds.  The
+computer tries to be fair, but it can only react within the bounds of its
+environment.  Two threads may have their communication order inverted, just
+because of environmental factors that change the rate of their execution
+(again: air temperature, other programs, etc).  Fairness plus mutation leads to
+something that sounds like procedurally generated minimalist music.  
+
+An example you may have heard is by Steve Reich, called "Tokyo/Vermont
+Counterpoint".  It begins with a simple pattern, which then mutates over the
+course of the piece.  The main difference between Nondeterminate and this work
+is that Nondeterminate generates a *different* base pattern with each execution
+(in fact, many times during each movement), whereas Reich's piece is statically
+defined by its base pattern.
+
+The movements are structured in the following way: Movement 1 sets the stage,
+using 16 threads to introduce the concept of nondeterminism, and (hopefully)
+revealing the pattern concept that is explored in later movements.  Movement 2
+divides the threads into two groups of 16 -- 16 are low, and 16 are high.
+Within a group, there are nondeterministic interleavings, but the groups
+interleave, deterministically alternating. The third movement is an attempt to,
+within the confines of programming as a compositional medium, to *eliminate*
+nondeterminism.  This movement is a parody of the other three, creating 8
+groups of 4 that typically proceed in sequence, and the tones of which
+interleave in a much more predictable way.  Movement 4 is the culmination of
+the piece.  It creates 64 threads, spanning the spectrum from A3 to C8.  The
+patterns are 64 tones long, and therefore take some time to discern.  However,
+by the end of the piece, it is clear what the order is, and the mingling of
+nondeterminism, and mutations is illustrated.
+
+I chose to keep this piece simple.  I did not vary the rhythmic pattern of the
+piece.  I did not use a particularly interesting voice (it is a simple sine
+wave).  There are two reasons, one more convincing than the other: The less
+convincing is that I wanted the concept of nondeterminism to be the highlight
+of the piece (I think that comes across as the piece is), and the more
+convincing is that writing music this way is difficult, and I was hard pressed
+to make something that sounded this coherent by way of programming.
+
+Finally, I'd like to note that the idea of nondeterminism is not begun, and
+ended with computer systems.  Other sources of nondeterminism exist, and may
+have similarly interesting patterns to those found in computer systems.  I
+think it would be interesting, for example, to create a piece of music that was
+a continuous tone, the pitch of which corresponded to the density of traffic on
+a stretch of highway over a period of days.   Because of the fact that people
+go to work in the morning and come home in the evening, patterns would emerge,
+but to a degree, because people are flaky and whimsical, it is likely that the
+tone would vary a great deal in smaller, nondeterministic ways as well.
+
+I hope you all enjoy the piece, and if you're saavy with computers, you can
+download the source code to Audiolyzer, as well as the source code to
+Nondeterminate from http://github.com/blucia0a/Audiolyzer.
+
+
+
+Recommended Listening:
+
+Iannis Xenakis - Pithoprakta  (explores randomness in complex systems as music)
+Krzystof Penderecki - De Natura Sonoris (explores composing for wide ranges of
+tones) 
+Steve Reich - Tokyo/Vermont Counterpoint (explores patterns and mutations) 
+Terry Riley - In C (patterns again, and minor variations over long duration)
