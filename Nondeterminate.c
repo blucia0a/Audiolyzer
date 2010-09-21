@@ -11,7 +11,7 @@
  *with Audiolyzer as the pintool (Audiolyzer is part of this project).
  *
  *A more thorough discussion of the piece and its structure and its main idea
- *can be found at http://catspajamas.tumblr.com
+ *can be found in README.Nondeterminate or at  http://catspajamas.tumblr.com
  *
  */
 #include <pthread.h>
